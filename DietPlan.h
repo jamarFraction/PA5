@@ -6,6 +6,7 @@
 #include <fstream>
 
 using std::ifstream;
+using std::ofstream;
 
 class DietPlan {
 
@@ -43,10 +44,6 @@ public:
 //non-member
 ifstream & operator >> (ifstream &lhs, List &rhs);
 
-////ListNode *makeNode();
-
-
-
-
+ofstream & operator << (ofstream &lhs, ListNode *&rhs);
 
 #endif /* DietPlan_h */

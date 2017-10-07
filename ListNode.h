@@ -38,7 +38,7 @@ public:
 	int GetGoalCalories();
 
 	//getter for the next Node in the list
-	//ListNode *GetNext();
+	ListNode *GetNext();
 
 	//setter for the next Node in the list
 	void SetNext(ListNode *next);

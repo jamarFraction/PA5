@@ -1,3 +1,7 @@
-﻿  FitnessAppWrapper.cpp
+﻿  main.cpp
+  List.cpp
+  FitnessAppWrapper.cpp
+  DietPlan.cpp
+  Generating Code...
   PA5.vcxproj -> C:\Users\Jamar\Documents\CPTS122\PA52\x64\Debug\PA5.exe
   PA5.vcxproj -> C:\Users\Jamar\Documents\CPTS122\PA52\x64\Debug\PA5.pdb (Full PDB)

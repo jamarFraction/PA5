@@ -53,6 +53,12 @@ int ListNode::GetGoalCalories() {
 	return goalCalories;
 }
 
+ListNode* ListNode::GetNext() {
+
+	return nextDay;
+
+}
+
 //setter for the next Node
 void ListNode::SetNext(ListNode *next) {
 

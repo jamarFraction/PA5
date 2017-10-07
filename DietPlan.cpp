@@ -19,7 +19,7 @@ void DietPlan::CreatePlan(ifstream &input) {
 ifstream & operator >> (ifstream &lhs, List &rhs) {
 
 
-	while (lhs) {
+	//while (lhs) {
 
 		string planName = "";
 		int goalCalories = 0;
@@ -47,78 +47,26 @@ ifstream & operator >> (ifstream &lhs, List &rhs) {
 		//newDay = this.makeNode(planName, goalCalories, date);
 		newDay = rhs.makeNode(planName, goalCalories, date);
 
-
 		//add the newly created Node to the List of daily plans
 		rhs.Add(newDay);
-
-		// lhs.ignore(std::numeric_limits<std::streamsize>::max(), '\n' );
-
-		//std::getline(lhs, date);
-
-		// lhs >> blah;
-	}
 
 	//return the stream
 	return lhs;
 }
 
+ofstream & operator << (ofstream &lhs, ListNode *&rhs) {
 
-//void DietPlan::Add(ListNode *newDay){
-//
-//    //Adding to an empty list
-//    if(listOfPlans.GetHead() == NULL && listOfPlans.GetTail() == NULL){
-//
-//        //point the head pointer to the address of the passed in ListNode
-//        listOfPlans.SetHead(newDay);
-//
-//        //point the tail pointer to the address of the passed in ListNode
-//        listOfPlans.SetTail(newDay);
-//
-//    }else{
-//        //adding to non-empty list
-//        //inset at pTail
-//
-//        //set the current pTail's pNext to the passed in ListNode
-//        listOfPlans.SetNext(newDay);
-//
-//        //point pTail to the passed in ListNode
-//        listOfPlans.SetTail(newDay);
-//
-//    }
-//
-//}
+	if (rhs->GetNext() != NULL) {
+		//normal line writing
+		lhs << rhs->GetPlanName() << "\n" << rhs->GetGoalCalories() << "\n" << rhs->GetDate() << "\n\n";
+	}
+	else {
+		//writing the last plan with no extra line
+		//keeps data consistent and makes so there is not an extra Node at the end of the list with no data
+		//that occurs when when there are empty lines at the end of the file
+		lhs << rhs->GetPlanName() << "\n" << rhs->GetGoalCalories() << "\n" << rhs->GetDate();
+	}
+	
+	return lhs;
 
-
-
-//Non-Member functions
-//ListNode* DietPlan::makeNode(string &planName, int &goal, string &date){
-//
-//    //declare and allocate space for a new ListNode
-//    ListNode *newNode = NULL;
-//
-//    //initialize the values of the new ListNode to the passed in ListNode values
-//    //newNode = planName;
-//    newNode->setPlanName(planName);
-//    newNode->setGoalCalories(goal);
-//    newNode->setDate(date);
-//
-//
-//    //return the new ListNode
-//    return newNode;
-//}
-
-//ListNode *makeNode(){
-//
-//    //declare and allocate space for a new ListNode
-//    ListNode *newNode = (ListNode *)malloc(sizeof(ListNode));
-//
-//    //initialize the values of the new ListNode to the deafault values
-//    newNode->date = "";
-//    newNode->goalCalories = 0;
-//    newNode->planName = "";
-//    newNode->nextDay = NULL;
-//
-//    //return the new ListNode
-//    return newNode;
-//
-//}
+}
