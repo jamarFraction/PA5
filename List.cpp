@@ -85,7 +85,7 @@ void List::Add(ListNode *newDay) {
 ListNode* List::makeNode(string planName, int goal, string date) {
 
 	//declare and allocate space for a new ListNode
-	ListNode *newNode = (ListNode*)malloc(sizeof(ListNode));
+	ListNode *newNode = new ListNode;// = (ListNode*)malloc(sizeof(ListNode));
 
 	//initialize the values of the new ListNode to the passed in ListNode values
 	//newNode = planName;
@@ -101,7 +101,7 @@ ListNode* List::makeNode(string planName, int goal, string date) {
 ListNode* List::makeNode() {
 
 	//declare and allocate space for a new ListNode
-	ListNode *newNode = (ListNode*)malloc(sizeof(ListNode));
+	ListNode *newNode = new ListNode;
 
 	//return the new ListNode
 	return newNode;

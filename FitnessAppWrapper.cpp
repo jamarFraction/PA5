@@ -1,13 +1,4 @@
 #include "FitnessAppWrapper.h"
-FitnessAppWrapper::FitnessAppWrapper()
-{
-}
-
-
-FitnessAppWrapper::~FitnessAppWrapper()
-{
-}
-#include "FitnessAppWrapper.h"
 
 void FitnessAppWrapper::runApp(void) {
 
@@ -31,6 +22,7 @@ void FitnessAppWrapper::runApp(void) {
 				//this will write information from the stream to the list in the DietPlan
 				weeklyDietPlan.CreatePlan(input);
 
+				input.close();
 				cout << "all done." << endl;
 
 			}

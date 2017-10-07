@@ -26,7 +26,7 @@ ifstream & operator >> (ifstream &lhs, List &rhs) {
 		string date = "";
 		string blah = "";
 
-		ListNode *newDay;
+		ListNode *newDay = NULL;
 
 		//Plan name
 		std::getline(lhs, planName);

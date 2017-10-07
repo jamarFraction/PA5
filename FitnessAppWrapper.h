@@ -13,8 +13,9 @@ private:
 
 public:
 
-	FitnessAppWrapper();
-	~FitnessAppWrapper();
+	FitnessAppWrapper() {};
+
+	~FitnessAppWrapper() {};
 
 	DietPlan weeklyDietPlan;
 
