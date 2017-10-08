@@ -11,27 +11,29 @@ class FitnessAppWrapper {
 
 private:
 
-	void displayDailyPlan(ListNode* const &day) const;
-
 	DietPlan weeklyDietPlan;
 
-public:
+	void displayDailyPlan(ListNode* const &day) const;
 
-	FitnessAppWrapper() {};
-
-	~FitnessAppWrapper() {};
-
-	
-	//required functions
-	void loadDailyPlan(ifstream &fileStream, List &list);
-
-	void loadWeeklyPlan(ifstream &fileStream, DietPlan &plan);
+	void displayWeeklyPlan(DietPlan const &plan) const;
 
 	void storeDailyPlan(ofstream &filestream, ListNode *&day);
 
 	void storeWeeklyPlan(ofstream &filestream, DietPlan const &List);
 
-	void displayWeeklyPlan(DietPlan const &plan) const;
+	void loadDailyPlan(ifstream &fileStream, List &list);
+
+	void loadWeeklyPlan(ifstream &fileStream, DietPlan &plan);
+
+	void editDailyPlan();
+
+	void editDailyPlan_DisplayWeek(ListNode *location);
+	
+public:
+
+	FitnessAppWrapper() {};
+
+	~FitnessAppWrapper() {};
 
 	void displayMenu();
 

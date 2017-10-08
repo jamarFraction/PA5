@@ -45,9 +45,6 @@ public:
 	//Setter for the tail pointer
 	void SetTail(ListNode *newDay);
 
-	//Setter for the next day
-	void SetNext(ListNode *newDay);
-
 	//Getters
 	//getter for pHead
 	ListNode* GetHead() const;

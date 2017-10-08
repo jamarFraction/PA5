@@ -83,7 +83,95 @@ void FitnessAppWrapper::storeWeeklyPlan(ofstream &filestream, DietPlan const &pl
 
 	}
 
-	system("pause");
+}
+
+void FitnessAppWrapper::editDailyPlan() {
+
+	//used for selecting options from the lists
+	int option = 0;
+
+	//ListNode pointer to keep track of our location in the linked list
+	ListNode *location = weeklyDietPlan.listOfPlans.GetHead();
+
+	do {
+		system("cls");
+
+		location = weeklyDietPlan.listOfPlans.GetHead();
+	
+		//print the list
+		editDailyPlan_DisplayWeek(location);
+
+		cout << "Which record (1-7) would you like to edit? ";
+
+		cin >> option;
+
+	} while (option < 1 || option > 7);
+
+	//re-initialize our location pointer
+	location = weeklyDietPlan.listOfPlans.GetHead();
+
+	//set location to the appropriate ListNode
+	for (int i = 0; i < option - 1; i++) {
+
+		location = location->GetNext();
+
+	}
+
+	//reset option
+	option = 0;
+
+	//get the information to be placed into the record
+	do {
+		//clear the screen
+		system("cls");
+
+		//Display the current record information
+		displayDailyPlan(location);
+
+		cout << "\nEnter a new calorie goal: ";
+		cin >> option;
+
+	} while (option < 0);
+
+	//set the new information
+	location->setGoalCalories(option);
+
+	//clear the screen and display the new weekly information
+	system("cls");
+
+	//ListNode pointer to keep track of our location in the linked list
+	location = weeklyDietPlan.listOfPlans.GetHead();
+
+	cout << "New goal saved.\nNew weekly plan:\n" << endl;
+
+	//print the list
+	editDailyPlan_DisplayWeek(location);
+	
+}
+
+void FitnessAppWrapper::editDailyPlan_DisplayWeek(ListNode *location) {
+	
+	
+	//used for printing the list
+	int menuIndex = 1;
+
+	while (location != NULL) {
+
+		//Display the menuIndex just before printing out the information
+		cout << menuIndex << ". ";
+
+		//pass the current pointer to the displayDailyPlan function to print out the day
+		displayDailyPlan(location);
+
+		//advance the pointer
+		location = location->GetNext();
+
+		//increment the menuIndex by 1
+		menuIndex += 1;
+
+	}
+
+
 }
 
 void FitnessAppWrapper::displayMenu() {
@@ -166,6 +254,13 @@ void FitnessAppWrapper::displayMenu() {
 			//Pass our DietPlan to the weekly display function
 			displayWeeklyPlan(weeklyDietPlan);
 			system("pause");
+		}
+		else if (option == 7) {
+			// Edit daily diet plan
+			editDailyPlan();
+
+			system("pause");
+
 		}
 
 	} while (option != 9);
