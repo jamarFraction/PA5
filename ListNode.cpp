@@ -1,6 +1,6 @@
 #include "ListNode.h"
 
-ListNode::ListNode(string date, string planName, int goalCalories)
+ListNode::ListNode(string date, string planName, int goalCaloriesOrSteps)
 {
 	//set the default values of the listNode to the values passed into the function
 	//Date
@@ -10,7 +10,7 @@ ListNode::ListNode(string date, string planName, int goalCalories)
 	setPlanName(planName);
 
 	//GoalCalories
-	setGoalCalories(goalCalories);
+	setGoalCaloriesOrSteps(goalCaloriesOrSteps);
 
 	//Next Day pointer.. NULL suits best for insertion.. saves a step
 	nextDay = NULL;
@@ -27,7 +27,7 @@ ListNode::ListNode()
 	setPlanName("");
 
 	//GoalCalories
-	setGoalCalories(-1);
+	setGoalCaloriesOrSteps(-1);
 
 	//Next Day pointer.. NULL suits best for insertion.. saves a step
 	nextDay = NULL;
@@ -48,9 +48,9 @@ string ListNode::GetPlanName() {
 }
 
 //getter for the goal
-int ListNode::GetGoalCalories() {
+int ListNode::GetGoalCaloriesOrSteps() {
 
-	return goalCalories;
+	return goalCaloriesOrSteps;
 }
 
 ListNode* ListNode::GetNext() {
@@ -81,8 +81,8 @@ void ListNode::setPlanName(string plan)
 
 }
 
-void ListNode::setGoalCalories(int goal) {
+void ListNode::setGoalCaloriesOrSteps(int goal) {
 
-	goalCalories = goal;
+	goalCaloriesOrSteps = goal;
 
 }

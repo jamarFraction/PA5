@@ -30,10 +30,10 @@ string List::GetPlanName(ListNode passedNode) {
 
 }
 
-int List::GetGoalCalories(ListNode passedNode) {
+int List::GetGoalCaloriesOrSteps(ListNode passedNode) {
 
 	//return the value of the private data member
-	return passedNode.GetGoalCalories();
+	return passedNode.GetGoalCaloriesOrSteps();
 }
 
 //Setters
@@ -90,7 +90,7 @@ ListNode* List::makeNode(string planName, int goal, string date) {
 	//initialize the values of the new ListNode to the passed in ListNode values
 	//newNode = planName;
 	newNode->setPlanName(planName);
-	newNode->setGoalCalories(goal);
+	newNode->setGoalCaloriesOrSteps(goal);
 	newNode->setDate(date);
 
 

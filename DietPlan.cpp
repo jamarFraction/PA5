@@ -22,7 +22,7 @@ ifstream & operator >> (ifstream &lhs, List &rhs) {
 	//while (lhs) {
 
 		string planName = "";
-		int goalCalories = 0;
+		int goalCaloriesOrSteps = 0;
 		string date = "";
 		string blah = "";
 
@@ -32,7 +32,7 @@ ifstream & operator >> (ifstream &lhs, List &rhs) {
 		std::getline(lhs, planName);
 
 		//Goal Calories
-		lhs >> goalCalories;
+		lhs >> goalCaloriesOrSteps;
 
 		//Date
 		lhs >> date;
@@ -44,8 +44,8 @@ ifstream & operator >> (ifstream &lhs, List &rhs) {
 		std::getline(lhs, blah);
 
 		//send our values to the Node maker function
-		//newDay = this.makeNode(planName, goalCalories, date);
-		newDay = rhs.makeNode(planName, goalCalories, date);
+		//newDay = this.makeNode(planName, goalCaloriesOrSteps, date);
+		newDay = rhs.makeNode(planName, goalCaloriesOrSteps, date);
 
 		//add the newly created Node to the List of daily plans
 		rhs.Add(newDay);
@@ -58,13 +58,13 @@ ofstream & operator << (ofstream &lhs, ListNode *&rhs) {
 
 	if (rhs->GetNext() != NULL) {
 		//normal line writing
-		lhs << rhs->GetPlanName() << "\n" << rhs->GetGoalCalories() << "\n" << rhs->GetDate() << "\n\n";
+		lhs << rhs->GetPlanName() << "\n" << rhs->GetGoalCaloriesOrSteps() << "\n" << rhs->GetDate() << "\n\n";
 	}
 	else {
 		//writing the last plan with no extra line
 		//keeps data consistent and makes so there is not an extra Node at the end of the list with no data
 		//that occurs when when there are empty lines at the end of the file
-		lhs << rhs->GetPlanName() << "\n" << rhs->GetGoalCalories() << "\n" << rhs->GetDate();
+		lhs << rhs->GetPlanName() << "\n" << rhs->GetGoalCaloriesOrSteps() << "\n" << rhs->GetDate();
 	}
 	
 	return lhs;

@@ -13,7 +13,7 @@ private:
 
 	string date;
 	string planName;
-	int goalCalories;
+	int goalCaloriesOrSteps;
 	ListNode *nextDay;
 
 public:
@@ -21,7 +21,7 @@ public:
 	ListNode();
 
 	//default constructor
-	ListNode(string date, string planName, int goalCalories);
+	ListNode(string date, string planName, int goalCaloriesOrSteps);
 
 	//default destructor
 	~ListNode() {
@@ -35,7 +35,7 @@ public:
 	string GetPlanName();
 
 	//getter for the goal
-	int GetGoalCalories();
+	int GetGoalCaloriesOrSteps();
 
 	//getter for the next Node in the list
 	ListNode *GetNext();
@@ -49,8 +49,8 @@ public:
 	//setter for the planName
 	void setPlanName(string plan);
 
-	//setter for the goalCalories
-	void setGoalCalories(int goal);
+	//setter for the goalCaloriesOrSteps
+	void setGoalCaloriesOrSteps(int goal);
 
 };
 

@@ -58,8 +58,8 @@ public:
 	//getter to retrieve the passed in ListNode's planName
 	string GetPlanName(ListNode passedNode);
 
-	//getter to retrieve the passed in ListNode's goalCalories
-	int GetGoalCalories(ListNode passedNode);
+	//getter to retrieve the passed in ListNode's goalCaloriesOrSteps
+	int GetGoalCaloriesOrSteps(ListNode passedNode);
 
 	ListNode* makeNode(string planName, int goal, string date);
 	ListNode* makeNode();

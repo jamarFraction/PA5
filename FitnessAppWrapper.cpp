@@ -31,13 +31,37 @@ void FitnessAppWrapper::loadWeeklyPlan(ifstream &fileStream, DietPlan &plan) {
 
 }
 
+void FitnessAppWrapper::loadWeeklyPlan(ifstream &fileStream, ExercisePlan &plan) {
+
+	//Pass the plan parameter to the loadDailyPlan as long as there still
+	//contains information within the fileStream
+	while (fileStream) {
+
+		loadDailyPlan(fileStream, plan.listOfPlans);
+
+	}
+
+
+}
+
 void FitnessAppWrapper::displayDailyPlan(ListNode* const &day) const {
 
 	//Format for display:
 	//Plan Name:
 	//Goal Calories:
 	//Date:
-	cout << "Plan Name: " << day->GetPlanName() << "\nGoal Calories: " << day->GetGoalCalories() <<
+	cout << "Plan Name: " << day->GetPlanName() << "\nGoal Calories: " << day->GetGoalCaloriesOrSteps() <<
+		"\nDate: " << day->GetDate() << "\n" << endl;
+
+}
+
+void FitnessAppWrapper::displayDailyPlanSpecial(ListNode* const &day) const {
+
+	//Format for display:
+	//Plan Name:
+	//Goal Calories:
+	//Date:
+	cout << "Plan Name: " << day->GetPlanName() << "\nGoal Steps: " << day->GetGoalCaloriesOrSteps() <<
 		"\nDate: " << day->GetDate() << "\n" << endl;
 
 }
@@ -53,6 +77,24 @@ void FitnessAppWrapper::displayWeeklyPlan(DietPlan const &plan) const {
 
 		//pass the current pointer to the displayDailyPlan function to print out the day
 		displayDailyPlan(location);
+
+		//advance the pointer
+		location = location->GetNext();
+
+	}
+}
+
+void FitnessAppWrapper::displayWeeklyPlan(ExercisePlan const &plan) const {
+
+	system("cls");
+
+	//ListNode pointer to keep track of our location in the linked list
+	ListNode *location = plan.listOfPlans.GetHead();
+
+	while (location != NULL) {
+
+		//pass the current pointer to the displayDailyPlan function to print out the day
+		displayDailyPlanSpecial(location);
 
 		//advance the pointer
 		location = location->GetNext();
@@ -85,7 +127,25 @@ void FitnessAppWrapper::storeWeeklyPlan(ofstream &filestream, DietPlan const &pl
 
 }
 
-void FitnessAppWrapper::editDailyPlan() {
+void FitnessAppWrapper::storeWeeklyPlan(ofstream &filestream, ExercisePlan const &plan) {
+
+	system("cls");
+
+	ListNode *location = plan.listOfPlans.GetHead();
+
+	while (location != NULL) {
+
+		//pass the current pointer to the storeDailyPlan function to store to dile the current day
+		storeDailyPlan(filestream, location);
+
+		//advance the pointer
+		location = location->GetNext();
+
+	}
+
+}
+
+void FitnessAppWrapper::editDailyDietPlan() {
 
 	//used for selecting options from the lists
 	int option = 0;
@@ -134,7 +194,7 @@ void FitnessAppWrapper::editDailyPlan() {
 	} while (option < 0);
 
 	//set the new information
-	location->setGoalCalories(option);
+	location->setGoalCaloriesOrSteps(option);
 
 	//clear the screen and display the new weekly information
 	system("cls");
@@ -149,6 +209,70 @@ void FitnessAppWrapper::editDailyPlan() {
 	
 }
 
+void FitnessAppWrapper::editDailyExercisePlan() {
+
+	//used for selecting options from the lists
+	int option = 0;
+
+	//ListNode pointer to keep track of our location in the linked list
+	ListNode *location = weeklyExercisePlan.listOfPlans.GetHead();
+
+	do {
+		system("cls");
+
+		location = weeklyExercisePlan.listOfPlans.GetHead();
+
+		//print the list
+		editDailyPlan_DisplayWeek(location);
+
+		cout << "Which record (1-7) would you like to edit? ";
+
+		cin >> option;
+
+	} while (option < 1 || option > 7);
+
+	//re-initialize our location pointer
+	location = weeklyExercisePlan.listOfPlans.GetHead();
+
+	//set location to the appropriate ListNode
+	for (int i = 0; i < option - 1; i++) {
+
+		location = location->GetNext();
+
+	}
+
+	//reset option
+	option = 0;
+
+	//get the information to be placed into the record
+	do {
+		//clear the screen
+		system("cls");
+
+		//Display the current record information
+		displayDailyPlanSpecial(location);
+
+		cout << "\nEnter a new step goal: ";
+		cin >> option;
+
+	} while (option < 0);
+
+	//set the new information
+	location->setGoalCaloriesOrSteps(option);
+
+	//clear the screen and display the new weekly information
+	system("cls");
+
+	//ListNode pointer to keep track of our location in the linked list
+	location = weeklyExercisePlan.listOfPlans.GetHead();
+
+	cout << "New goal saved.\nNew weekly plan:\n" << endl;
+
+	//print the list
+	editDailyPlan_DisplayWeek(location);
+
+}
+
 void FitnessAppWrapper::editDailyPlan_DisplayWeek(ListNode *location) {
 	
 	
@@ -161,7 +285,7 @@ void FitnessAppWrapper::editDailyPlan_DisplayWeek(ListNode *location) {
 		cout << menuIndex << ". ";
 
 		//pass the current pointer to the displayDailyPlan function to print out the day
-		displayDailyPlan(location);
+		displayDailyPlanSpecial(location);
 
 		//advance the pointer
 		location = location->GetNext();
@@ -170,6 +294,63 @@ void FitnessAppWrapper::editDailyPlan_DisplayWeek(ListNode *location) {
 		menuIndex += 1;
 
 	}
+
+
+}
+
+void FitnessAppWrapper::saveDietPlan() {
+
+	//start DietPlan writing by opening the file for writing 
+	ofstream outfile("dietPlans.txt");
+
+	if (outfile.is_open()) { // were we successful in opening the stream?
+
+		//send to writing function
+		storeWeeklyPlan(outfile, weeklyDietPlan);
+
+		outfile.close();
+		cout << "Diet Plan written successfully" << endl;
+		system("pause");
+
+	}//end read in file successfully 
+	else {
+		//Error opening the file
+		//Clear the screen
+		system("cls");
+
+		//Display Error message
+		cout << "Error opening the file" << endl;
+		system("pause");
+
+	}//end file write error
+
+}
+
+void FitnessAppWrapper::saveExercisePlan() {
+
+	//start ExercisePlan writing by opening the file for writing 
+	ofstream outfile("exercisePlans.txt");
+
+	if (outfile.is_open()) { // were we successful in opening the stream?
+
+							 //send to writing function
+		storeWeeklyPlan(outfile, weeklyExercisePlan);
+
+		outfile.close();
+		cout << "Exercise Plan written successfully" << endl;
+		system("pause");
+
+	}//end read in file successfully 
+	else {
+		//Error opening the file
+		//Clear the screen
+		system("cls");
+
+		//Display Error message
+		cout << "Error opening the file" << endl;
+		system("pause");
+
+	}//end file write error
 
 
 }
@@ -221,32 +402,42 @@ void FitnessAppWrapper::displayMenu() {
 		}//End load Diet Plan
 		else if (option == 2) {
 
-		}
-		else if (option == 3) {
+			//Start weekly plan read-in
+			ifstream input("exercisePlans.txt");
 
-			//start DietPlan writing by opening the file for writing 
-			ofstream outfile("dietPlans.txt");
+			if (input.is_open()) { // were we successful in opening the stream?
 
-			if (outfile.is_open()) { // were we successful in opening the stream?
 
-				//send to writing function
-				storeWeeklyPlan(outfile, weeklyDietPlan);
+				loadWeeklyPlan(input, weeklyExercisePlan);
+				//Send the stream to the processor function
+				//this will write information from the stream to the list in the DietPlan
+				//weeklyExercisePlan.CreatePlan(input);
 
-				outfile.close();
-				cout << "Diet Plan written successfully" << endl;
+				input.close();
+				cout << "Exercise Plan read in successfully" << endl;
 				system("pause");
 
 			}//end read in file successfully 
 			else {
-				//Error opening the file
+				//Error reading in the file
 				//Clear the screen
 				system("cls");
 
 				//Display Error message
-				cout << "Error opening the file" << endl;
+				cout << "Error reading in file" << endl;
 				system("pause");
 
-			}//end file write error
+			}//end file read-in error
+
+		}
+		else if (option == 3) {
+
+			saveDietPlan();
+			
+		}
+		else if (option == 4){
+
+			saveExercisePlan();
 
 		}
 		else if (option == 5) {
@@ -255,15 +446,32 @@ void FitnessAppWrapper::displayMenu() {
 			displayWeeklyPlan(weeklyDietPlan);
 			system("pause");
 		}
+		else if (option == 6) {
+
+			//Pass our DietPlan to the weekly display function
+			displayWeeklyPlan(weeklyExercisePlan);
+			system("pause");
+		}
 		else if (option == 7) {
 			// Edit daily diet plan
-			editDailyPlan();
+			editDailyDietPlan();
+
+			system("pause");
+
+		}
+		else if (option == 8) {
+			// Edit daily exercise plan
+			editDailyExercisePlan();
 
 			system("pause");
 
 		}
 
 	} while (option != 9);
+
+	//save both of the files before exiting
+	saveDietPlan();
+	saveExercisePlan();
 			
 
 }
