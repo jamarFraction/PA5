@@ -10,10 +10,7 @@
 #define ExercisePlan_h
 
 #include "List.h"
-#include <fstream>
 
-using std::ifstream;
-using std::ofstream;
 
 class ExercisePlan {
 
@@ -42,10 +39,12 @@ public:
 	ExercisePlan(ExercisePlan &copyPlan);
 
 	//Create Plan
-	void CreatePlan(ifstream &input);
-
-	//MakeNode
-	//ListNode* makeNode(string &planName, int &goal, string &date);
+	void CreatePlan(fstream &input);
 };
+
+//non-member
+fstream & operator >> (fstream &lhs, List &rhs);
+
+fstream & operator << (fstream &lhs, ListNode *&rhs);
 
 #endif /* DietPlan_h */

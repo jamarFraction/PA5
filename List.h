@@ -9,8 +9,10 @@
 #include "ListNode.h"
 
 #include <string>
+#include <fstream>
 
 using std::string;
+using std::fstream;
 
 
 class List {
@@ -60,14 +62,18 @@ public:
 	ListNode* GetTail();
 
 	//getter to retrieve the passed in ListNode's date
-	string GetDate(ListNode passedNode);
+	string GetDate(ListNode const passedNode) const;
 
 	//getter to retrieve the passed in ListNode's planName
-	string GetPlanName(ListNode passedNode);
+	string GetPlanName(ListNode const passedNode) const;
 
 	//getter to retrieve the passed in ListNode's goalCaloriesOrSteps
-	int GetGoalCaloriesOrSteps(ListNode passedNode);
+	int GetGoalCaloriesOrSteps(ListNode const passedNode) const;
 
+	//makenode functions 
+	//for creating Node's with values populated
 	ListNode* makeNode(string planName, int goal, string date);
+
+	//default value nodes
 	ListNode* makeNode();
 };

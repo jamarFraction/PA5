@@ -8,14 +8,28 @@
 #include "DietPlan.h"
 
 //Copy Contructor
-DietPlan::DietPlan(DietPlan &copyPlan) {
+DietPlan::DietPlan(DietPlan const &copyPlan) {
 
-	//copy over the list.. by value?
-	listOfPlans = copyPlan.listOfPlans;
+	//copy over the list.. by reference
+
+	//Deep copy start
+	ListNode *location = copyPlan.listOfPlans.GetHead();
+
+	while (location != nullptr) {
+		
+		//Create a node with all of the same information as whats in the location node
+		//and Add it with the Add function I wrote in the List class
+		listOfPlans.Add(listOfPlans.makeNode(copyPlan.listOfPlans.GetPlanName(*location), copyPlan.listOfPlans.GetGoalCaloriesOrSteps(*location),
+			copyPlan.listOfPlans.GetDate(*location)));
+
+		//update where location points to
+		location = location->GetNext();
+
+	}
 
 }
 
-void DietPlan::CreatePlan(ifstream &input) {
+void DietPlan::CreatePlan(fstream &input) {
 
 	//overloaded stream operator
 	//will read all plans from the input stream
@@ -23,7 +37,7 @@ void DietPlan::CreatePlan(ifstream &input) {
 
 }
 
-ifstream & operator >> (ifstream &lhs, List &rhs) {
+fstream & operator >> (fstream &lhs, List &rhs) {
 
 
 	//while (lhs) {
@@ -61,7 +75,7 @@ ifstream & operator >> (ifstream &lhs, List &rhs) {
 	return lhs;
 }
 
-ofstream & operator << (ofstream &lhs, ListNode *&rhs) {
+fstream & operator << (fstream &lhs, ListNode *&rhs) {
 
 	if (rhs->GetNext() != NULL) {
 		//normal line writing

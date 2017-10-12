@@ -23,21 +23,21 @@ ListNode* List::GetTail() {
 }
 
 
-string List::GetDate(ListNode passedNode) {
+string List::GetDate(ListNode const passedNode) const{
 
 	//return the value of the private data member
 	return passedNode.GetDate();
 
 }
 
-string List::GetPlanName(ListNode passedNode) {
+string List::GetPlanName(ListNode const passedNode) const {
 
 	//return the value of the private data member
 	return passedNode.GetPlanName();
 
 }
 
-int List::GetGoalCaloriesOrSteps(ListNode passedNode) {
+int List::GetGoalCaloriesOrSteps(ListNode const passedNode) const {
 
 	//return the value of the private data member
 	return passedNode.GetGoalCaloriesOrSteps();
@@ -58,7 +58,6 @@ void List::SetTail(ListNode *newDay) {
 
 }
 
-//Setter for the next day
 
 void List::Add(ListNode *newDay) {
 

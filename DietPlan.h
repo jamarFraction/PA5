@@ -10,10 +10,6 @@
 #define DietPlan_h
 
 #include "List.h"
-#include <fstream>
-
-using std::ifstream;
-using std::ofstream;
 
 class DietPlan {
 
@@ -29,6 +25,8 @@ public:
 	DietPlan() {
 
 		//what to put here?
+		//pretty sure I don't have to include anything here because this DietPlan class will call on the 
+		//List class' constructor
 
 	};
 
@@ -39,16 +37,16 @@ public:
 	}
 
 	//Copy Constructor
-	DietPlan(DietPlan &copyPlan);
+	DietPlan(DietPlan const &copyPlan);
 
 	//Create Plan
-	void CreatePlan(ifstream &input);
+	void CreatePlan(fstream &input);
 
 };
 
 //non-member
-ifstream & operator >> (ifstream &lhs, List &rhs);
+fstream & operator >> (fstream &lhs, List &rhs);
 
-ofstream & operator << (ofstream &lhs, ListNode *&rhs);
+fstream & operator << (fstream &lhs, ListNode *&rhs);
 
 #endif /* DietPlan_h */

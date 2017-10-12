@@ -42,25 +42,25 @@ ListNode::ListNode()
 }
 
 //getter for the date
-string ListNode::GetDate() {
+string ListNode::GetDate() const {
 
 	return date;
 }
 
 //getter for the plan name
-string ListNode::GetPlanName() {
+string ListNode::GetPlanName() const {
 
 	return planName;
 
 }
 
 //getter for the goal
-int ListNode::GetGoalCaloriesOrSteps() {
+int ListNode::GetGoalCaloriesOrSteps() const {
 
 	return goalCaloriesOrSteps;
 }
 
-ListNode* ListNode::GetNext() {
+ListNode* ListNode::GetNext() const {
 
 	return nextDay;
 

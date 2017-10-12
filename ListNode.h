@@ -36,16 +36,16 @@ public:
 	}
 
 	//getter for the date
-	string GetDate();
+	string GetDate() const;
 
 	//getter for the plan name
-	string GetPlanName();
+	string GetPlanName() const;
 
 	//getter for the goal
-	int GetGoalCaloriesOrSteps();
+	int GetGoalCaloriesOrSteps() const;
 
 	//getter for the next Node in the list
-	ListNode *GetNext();
+	ListNode *GetNext() const;
 
 	//setter for the next Node in the list
 	void SetNext(ListNode *next);

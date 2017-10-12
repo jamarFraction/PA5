@@ -17,7 +17,7 @@ void FitnessAppWrapper::runApp(void) {
 	
 }
 
-void FitnessAppWrapper::loadDailyPlan(ifstream &fileStream, List &list) {
+void FitnessAppWrapper::loadDailyPlan(fstream &fileStream, List &list) {
 
 	//Daily plan read-in.
 	//Overloaded >> operator defined within DietPlan
@@ -25,7 +25,7 @@ void FitnessAppWrapper::loadDailyPlan(ifstream &fileStream, List &list) {
 
 }
 
-void FitnessAppWrapper::loadWeeklyPlan(ifstream &fileStream, DietPlan &plan) {
+void FitnessAppWrapper::loadWeeklyPlan(fstream &fileStream, DietPlan &plan) {
 
 	//Pass the plan parameter to the loadDailyPlan as long as there still
 	//contains information within the fileStream
@@ -38,7 +38,7 @@ void FitnessAppWrapper::loadWeeklyPlan(ifstream &fileStream, DietPlan &plan) {
 
 }
 
-void FitnessAppWrapper::loadWeeklyPlan(ifstream &fileStream, ExercisePlan &plan) {
+void FitnessAppWrapper::loadWeeklyPlan(fstream &fileStream, ExercisePlan &plan) {
 
 	//Pass the plan parameter to the loadDailyPlan as long as there still
 	//contains information within the fileStream
@@ -109,14 +109,14 @@ void FitnessAppWrapper::displayWeeklyPlan(ExercisePlan const &plan) const {
 	}
 }
 
-void FitnessAppWrapper::storeDailyPlan(ofstream &filestream, ListNode *&day){
+void FitnessAppWrapper::storeDailyPlan(fstream &filestream, ListNode *&day){
 
 	//overloaded << operator for writing to a file
 	filestream << day;
 
 }
 
-void FitnessAppWrapper::storeWeeklyPlan(ofstream &filestream, DietPlan const &plan) {
+void FitnessAppWrapper::storeWeeklyPlan(fstream &filestream, DietPlan const &plan) {
 
 	system("cls");
 
@@ -134,7 +134,7 @@ void FitnessAppWrapper::storeWeeklyPlan(ofstream &filestream, DietPlan const &pl
 
 }
 
-void FitnessAppWrapper::storeWeeklyPlan(ofstream &filestream, ExercisePlan const &plan) {
+void FitnessAppWrapper::storeWeeklyPlan(fstream &filestream, ExercisePlan const &plan) {
 
 	system("cls");
 
@@ -308,7 +308,7 @@ void FitnessAppWrapper::editDailyPlan_DisplayWeek(ListNode *location) {
 void FitnessAppWrapper::saveDietPlan() {
 
 	//start DietPlan writing by opening the file for writing 
-	ofstream outfile("dietPlans.txt");
+	fstream outfile("dietPlans.txt");
 
 	if (outfile.is_open()) { // were we successful in opening the stream?
 
@@ -336,7 +336,7 @@ void FitnessAppWrapper::saveDietPlan() {
 void FitnessAppWrapper::saveExercisePlan() {
 
 	//start ExercisePlan writing by opening the file for writing 
-	ofstream outfile("exercisePlans.txt");
+	fstream outfile("exercisePlans.txt");
 
 	if (outfile.is_open()) { // were we successful in opening the stream?
 
@@ -381,7 +381,7 @@ void FitnessAppWrapper::displayMenu() {
 		if (option == 1) {
 
 			//Start weekly plan read-in
-			ifstream input("dietPlans.txt");
+			fstream input("dietPlans.txt");
 
 			if (input.is_open()){ // were we successful in opening the stream?
 			
@@ -391,7 +391,10 @@ void FitnessAppWrapper::displayMenu() {
 				//this will write information from the stream to the list in the DietPlan
 				//weeklyDietPlan.CreatePlan(input);
 
-				input.close();
+				List l1(weeklyDietPlan.listOfPlans);
+
+				//testing for deep copy constructor
+				//input.close();
 				cout << "Diet Plan read in successfully" << endl;
 				system("pause");
 
@@ -410,7 +413,7 @@ void FitnessAppWrapper::displayMenu() {
 		else if (option == 2) {
 
 			//Start weekly plan read-in
-			ifstream input("exercisePlans.txt");
+			fstream input("exercisePlans.txt");
 
 			if (input.is_open()) { // were we successful in opening the stream?
 
